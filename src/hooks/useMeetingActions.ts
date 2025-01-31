@@ -6,6 +6,7 @@ const useMeetingActions = () => {
   const router = useRouter();
   const client = useStreamVideoClient();
 
+
   const createInstantMeeting = async () => {
     if (!client) return;
     try {

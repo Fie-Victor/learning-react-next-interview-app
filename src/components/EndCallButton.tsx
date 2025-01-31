@@ -17,18 +17,19 @@ const interview = useQuery(api.interviews.getmyInterviewsByStreamCallId,{
     streamCallId: call?.id || "",
 });
 
-    if(!call || !interview) return null;
+    if(!call) return null;
 
     const isMeetingOwner = localParticipant?.userId === call.state.createdBy?.id;
-    if(!isMeetingOwner) return null;
+     if(!isMeetingOwner) return null;
 
     const endCall = async() =>{
         try {
             await call.endCall();
+            if(!!interview){
             await updateInterviewStatus({
                 id: interview._id,
                 status: "completed",
-            })
+            })}
             router.push("/");
             toast.success("Meeting ended for everyone");
         } catch (error) {
