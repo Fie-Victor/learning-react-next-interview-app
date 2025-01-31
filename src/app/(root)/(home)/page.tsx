@@ -11,6 +11,7 @@ import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
 import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const { isInterviewer, isCandidate, isLoading } = useUserRole();
@@ -89,6 +90,15 @@ export default function Home() {
                 You have no scheduled interviews at the moment
               </div>
             )}
+          </div>
+          <div className="mt-5">
+          <Button onClick={()=>handleQuickAction("Join Interview")}>Join a meeting with the link</Button>
+          <MeetingModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            title={modalType === "join" ? "Join Meeting" : "Start Meeting"}
+            isJoinMeeting={modalType === "join"}
+          />
           </div>
         </>
       )}
